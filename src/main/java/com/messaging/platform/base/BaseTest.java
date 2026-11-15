@@ -1,10 +1,9 @@
 package com.messaging.platform.base;
 
 import java.time.Duration;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -54,12 +53,7 @@ import com.messaging.platform.utils.ConfigReader;
 @Listeners(TestListeners.class)
 public class BaseTest {
 
-	static {
-		LogManager.getLogManager().reset();
-		Logger.getLogger("").setLevel(Level.SEVERE);
-	}
-
-	protected final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(getClass());
+	protected final Logger log = LogManager.getLogger(getClass());
 
 	protected WebDriver driver;
 	protected LoginPage loginPage;
