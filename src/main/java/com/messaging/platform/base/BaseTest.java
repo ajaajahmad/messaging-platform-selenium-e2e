@@ -1,9 +1,11 @@
 package com.messaging.platform.base;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,7 +16,9 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
 import com.messaging.platform.listeners.TestListeners;
@@ -154,6 +158,18 @@ public class BaseTest {
 		userAccountMisTruecallerPanelPage = new UserAccountMisTruecallerPanelPage(driver);
 		userAccountMisTruecallerApiPage = new UserAccountMisTruecallerApiPage(driver);
 
+	}
+
+	// Tags every log line from this thread; log4j2.xml routes tagged lines to a per-test file.
+	// The class name is part of the tag because method names repeat across test classes.
+	@BeforeMethod(alwaysRun = true)
+	public void tagLogWithTest(Method method) {
+		ThreadContext.put("test", getClass().getSimpleName() + "." + method.getName());
+	}
+
+	@AfterMethod(alwaysRun = true)
+	public void untagLog() {
+		ThreadContext.remove("test");
 	}
 
 	@AfterClass(alwaysRun = true)
