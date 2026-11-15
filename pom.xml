@@ -17,7 +17,7 @@
 		<testng.version>7.9.0</testng.version>
 		<webdrivermanager.version>5.6.2</webdrivermanager.version>
 		<extentreports.version>5.1.1</extentreports.version>
-		<log4j.version>2.21.1</log4j.version>
+		<log4j.version>2.25.5</log4j.version>
 		<poi.version>5.2.4</poi.version>
 		<maven.surefire.version>3.2.2</maven.surefire.version>
 		<maven.compiler.version>3.11.0</maven.compiler.version>
