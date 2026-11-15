@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import com.messaging.platform.base.BasePage;
 import com.messaging.platform.pages.components.DatePickerComponent;
@@ -32,13 +31,12 @@ public class UserAccountMisSmsPanelPage extends BasePage {
 		this.date = new DatePickerComponent(driver);
 	}
 
-	@FindBy(xpath = "//button[contains(text(),'Search')]")
-	private WebElement searchButton;
+	private By searchButton = By.xpath("//button[contains(text(),'Search')]");
 
 	public void openUserAccountMisSmsPanel(String startValue, String endValue) {
 		menu.navigate("Users", "Account MIS", "SMS");
 		date.chooseDateOnAdvancedPage(startValue, endValue);
-		searchButton.click();
+		click(searchButton);
 		sleep();
 
 	}
