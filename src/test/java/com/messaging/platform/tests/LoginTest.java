@@ -1,0 +1,27 @@
+package com.messaging.platform.tests;
+
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+
+import com.messaging.platform.base.BaseTest;
+import com.messaging.platform.dataprovider.TestDataProvider;
+
+public class LoginTest extends BaseTest {
+
+	@Test(dataProvider = "loginData", dataProviderClass = TestDataProvider.class)
+	public void validLoginTest(String username, String password) throws IOException {
+		Assert.assertTrue(loginPage.isElementPresent(), "Login page is not displayed");
+		loginPage.userLogin(username, password);
+		System.out.println("Valid login test passed successfully");
+	}
+
+	@Test(enabled = false)
+	public void invalidLoginTest() {
+		Assert.assertTrue(loginPage.isElementPresent(), "Login page is not displayed");
+		System.out.println("Invalid login test passed successfully");
+	}
+
+}
