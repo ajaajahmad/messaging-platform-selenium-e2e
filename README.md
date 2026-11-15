@@ -58,13 +58,19 @@ Run the default suite in `testng.xml`:
 mvn test
 ```
 
+Run every test class:
+
+```bash
+mvn test -DsuiteXmlFile=full_suite.xml
+```
+
 Run the SMS campaign suite:
 
 ```bash
-mvn test -Dsurefire.suiteXmlFiles=sms_campaign.xml
+mvn test -DsuiteXmlFile=sms_campaign.xml
 ```
 
-To run a different test class, list it in `testng.xml`. The browser is created once per suite, so keep one test class per suite file.
+Each test class opens its own browser, logs in and logs out. The tests run against a live application in a visible browser window, and the campaign test sends a real campaign to the configured list.
 
 ## Output
 
