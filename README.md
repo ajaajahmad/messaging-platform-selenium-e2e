@@ -77,7 +77,26 @@ Each test class opens its own browser, logs in and logs out. The tests run again
 - `reports/` holds the exported HTML tables, one folder per report page
 - `screenshots/` holds the screenshots
 - `screenshots/failures/` holds a screenshot of the browser for each failed test
-- `logs/automation.log` holds the Log4j output: the start and result of every test, plus each click, typed field and navigation. Typed text and login data are never logged.
+- `logs/` holds the run logs, described below
+
+## Logging
+
+Each run writes its logs to its own folder, named after the time the run started:
+
+```
+logs/2026-11-15_18-20-41/
+  messaging-platform-e2e.log        every line from the run at DEBUG, tagged with its test
+  LoginTest.validLoginTest.log      one file per test: its steps and any stack trace
+  ...
+```
+
+The console shows each test's start and result, plus each sidebar navigation. `-Dlog.level=warn` reduces it to failures and warnings, and `-Dlog.level=debug` adds every click and typed field. The last line of a run prints the log folder path.
+
+`logs/` sits outside `target/`, so `mvn clean` keeps earlier runs for comparison. Delete old run folders by hand when they are no longer needed.
+
+Clicks and typed fields are logged at DEBUG, so they are always in the log files. Typed text and login data are never logged.
+
+TestNG's SLF4J output and Selenium's `java.util.logging` output are both routed into Log4j2, so `log4j2.xml` is the single place to change what gets logged.
 
 ## Licence
 
