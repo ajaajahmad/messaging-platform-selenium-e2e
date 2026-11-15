@@ -14,4 +14,4 @@ Include the affected file or dependency and the steps to reproduce. You can expe
 
 In scope are the code and dependencies in this repository. The application under test is not part of this repository and is out of scope.
 
-No credentials are stored here. The config file and test data files are gitignored, and only empty example files are committed.
+No credentials are stored here. The config file and test data files are gitignored, and only example files with placeholder or empty values are committed.
