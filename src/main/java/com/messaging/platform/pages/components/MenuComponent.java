@@ -52,6 +52,8 @@ public class MenuComponent extends BasePage {
 
 	public void navigate(String... menuPath) {
 
+		log.info("Navigate to {}", String.join(" > ", menuPath));
+
 		WebElement currentScope = root();
 
 		for (int i = 0; i < menuPath.length - 1; i++) {
@@ -65,6 +67,7 @@ public class MenuComponent extends BasePage {
 
 		// The click is sometimes swallowed while the sidebar is still settling; try once more.
 		if (!waitForUrlChange(urlBefore)) {
+			log.warn("Page did not change after clicking {}; clicking again", target);
 			clickFinal(currentScope, target);
 			waitForUrlChange(urlBefore);
 		}
