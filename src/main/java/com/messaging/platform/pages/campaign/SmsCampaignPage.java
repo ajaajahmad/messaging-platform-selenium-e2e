@@ -49,6 +49,10 @@ public class SmsCampaignPage extends BasePage {
 	private By contactsImportButton = By
 			.xpath("//button[contains(@class,'process-file') and contains(normalize-space(),'Import')]");
 
+	private By activeModal = By.cssSelector(".app-modal.modal-active");
+
+	private By contactsImportedTick = By.cssSelector(".upload-contacts .tick-mark");
+
 	private By chooseTemplateButton = By
 			.xpath("//button[contains(@class,'btn-design') and contains(text(),'Choose Template')]");
 
@@ -120,6 +124,8 @@ public class SmsCampaignPage extends BasePage {
 
 	public void clickOnImportButton() {
 		click(contactsImportButton);
+		waitForInvisible(activeModal);
+		waitForVisible(contactsImportedTick);
 	}
 
 	public void clickOnChooseTemplate() {
