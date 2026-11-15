@@ -1,24 +1,76 @@
-# QuantumQA Automation Framework
+# Messaging Platform Selenium E2E
 
-## Overview
-QuantumQA Automation is a **data-driven Selenium framework** built with **Java, Maven, TestNG, and Page Object Model (POM)**.  
-It supports dynamic tests using Excel and JSON, centralized DataProviders, and reusable page objects.
+End-to-end UI tests for a web messaging platform, written in Java with Selenium WebDriver, TestNG and Maven, using the Page Object Model.
 
-## Features
-- Page Object Model for maintainable code
-- Data-driven testing with Excel
-- TestNG framework integration
-- Configurable properties via `config.properties`
-- Reusable utilities (Excel, ConfigReader, DataProvider)
-- Easy to extend and maintain
+## What it covers
+
+- Login
+- SMS and WhatsApp campaign creation
+- Summary and Advanced reports for SMS, WhatsApp, RCS and Truecaller, in both the panel and API views
+- Account MIS reports for the same four channels
+
+The report tests walk through every "view by" option on a page and save each table as an HTML file with a screenshot.
+
+## Project layout
+
+```
+src/main/java/com/messaging/platform
+  base/         BasePage (waits, clicks, typing) and BaseTest (browser set-up)
+  pages/        page objects, grouped by login, campaign, mis, users and components
+  utils/        config, Excel and JSON readers, screenshots, HTML table export
+src/test/java/com/messaging/platform
+  dataprovider/ TestNG data providers
+  tests/        test classes
+```
 
 ## Prerequisites
-- Java 11+
-- Maven 3.8+
-- Chrome browser installed
-- ChromeDriver managed via WebDriverManager (optional)
 
-## How to Run
-1. Clone the repository:
+- Java 21
+- Maven 3.8 or later
+- Chrome, Firefox or Edge
+
+Selenium Manager downloads the matching browser driver on first run.
+
+## Set-up
+
+1. Clone the repository.
+
    ```bash
-   git clone https://github.com/ajaajahmad/QuantumQA-Automation.git
+   git clone https://github.com/ajaajahmad/messaging-platform-selenium-e2e.git
+   cd messaging-platform-selenium-e2e
+   ```
+
+2. Create the config file and fill in the application URL, browser and the list and template names used by the campaign tests.
+
+   ```bash
+   cp src/main/resources/config.properties.example src/main/resources/config.properties
+   ```
+
+3. Add the login data. Create `src/test/resources/testdata/userdata.xlsx` with a header row followed by one row per user, username in the first column and password in the second. The sheet name must match `excel_sheet_name` in the config file.
+
+The config file and all test data files are gitignored, so credentials stay on your machine.
+
+## Running
+
+Run the default suite in `testng.xml`:
+
+```bash
+mvn test
+```
+
+Run the SMS campaign suite:
+
+```bash
+mvn test -Dsurefire.suiteXmlFiles=sms_campaign.xml
+```
+
+To run a different test class, list it in `testng.xml`. The browser is created once per suite, so keep one test class per suite file.
+
+## Output
+
+- `reports/` holds the exported HTML tables, one folder per report page
+- `screenshots/` holds the screenshots
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
