@@ -16,6 +16,9 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+
+import com.messaging.platform.listeners.TestListeners;
 
 import com.messaging.platform.pages.campaign.SmsCampaignPage;
 import com.messaging.platform.pages.campaign.WhatsAppCampaignPage;
@@ -48,6 +51,7 @@ import com.messaging.platform.pages.users.UserAccountMisWhatsAppApiPage;
 import com.messaging.platform.pages.users.UserAccountMisWhatsAppPanelPage;
 import com.messaging.platform.utils.ConfigReader;
 
+@Listeners(TestListeners.class)
 public class BaseTest {
 
 	static {
@@ -85,6 +89,10 @@ public class BaseTest {
 	protected UserAccountMisRcsApiPage userAccountMisRcsApiPage;
 	protected UserAccountMisTruecallerPanelPage userAccountMisTruecallerPanelPage;
 	protected UserAccountMisTruecallerApiPage userAccountMisTruecallerApiPage;
+
+	public WebDriver getDriver() {
+		return driver;
+	}
 
 	@BeforeClass(alwaysRun = true)
 	public void setUp() {
