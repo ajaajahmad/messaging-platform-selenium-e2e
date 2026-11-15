@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn">
+<!-- status="error": the JUL bridge warns every time Selenium tries to add its own handler, which is harmless -->
+<Configuration status="error">
 	<Properties>
 		<!-- One folder per run, named by RunLookup with the time the run started. Outside target/ so
 			 mvn clean keeps past runs. TestListeners finds the folder through the RunLog appender,
@@ -42,6 +43,7 @@
 
 		<!-- The suite does not use CDP, so a Chrome/CDP version mismatch has no effect on results -->
 		<Logger name="org.openqa.selenium.devtools.CdpVersionFinder" level="error" />
+		<Logger name="org.openqa.selenium.chromium.ChromiumDriver" level="error" />
 
 		<Root level="warn">
 			<AppenderRef ref="Console" level="${sys:log.level:-info}" />
