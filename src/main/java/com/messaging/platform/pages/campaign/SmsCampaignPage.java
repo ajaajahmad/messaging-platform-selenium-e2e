@@ -31,7 +31,7 @@ public class SmsCampaignPage extends BasePage {
 
 	private By campaignsElement = By.xpath("//span[normalize-space()='Campaigns']");
 
-	private By campaignsDltPopup = By.xpath("//button[contains(text(),'OK')]");
+//	private By campaignsDltPopup = By.xpath("//button[contains(text(),'OK')]");
 
 	private By createCampaign = By.xpath(
 			"//button[@class='btn btn-design btn-send ng-star-inserted']//span[contains(text(),'Create Campaign')]");
@@ -78,9 +78,9 @@ public class SmsCampaignPage extends BasePage {
 		getCampaignsSubMenu().click();
 	}
 
-	public void acknowledgeDltPopupWindow() {
-		click(campaignsDltPopup);
-	}
+//	public void acknowledgeDltPopupWindow() {
+//		click(campaignsDltPopup);
+//	}
 
 	public void clickOnCreateCampaignButton() {
 		click(createCampaign);
