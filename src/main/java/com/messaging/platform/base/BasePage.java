@@ -65,7 +65,7 @@ public class BasePage {
 	}
 
 	protected void click(By locator) {
-		log.info("Click {}", locator);
+		log.debug("Click {}", locator);
 		sleep();
 		for (int attempt = 1;; attempt++) {
 			try {
@@ -98,7 +98,7 @@ public class BasePage {
 
 	// The typed text is never logged: it can be a password.
 	protected void type(By locator, String text) {
-		log.info("Type into {}", locator);
+		log.debug("Type into {}", locator);
 		sleep();
 		WebElement element = waitForVisible(locator);
 		element.clear();
@@ -107,7 +107,7 @@ public class BasePage {
 	}
 
 	protected void typeAndEnter(By locator, String text) {
-		log.info("Type into {} and press Enter", locator);
+		log.debug("Type into {} and press Enter", locator);
 		WebElement element = waitForVisible(locator);
 		element.clear();
 		element.sendKeys(text, Keys.ENTER);
