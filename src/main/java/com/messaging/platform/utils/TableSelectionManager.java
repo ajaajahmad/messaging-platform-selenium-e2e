@@ -28,10 +28,14 @@ public class TableSelectionManager {
 
 				for (WebElement row : tableRows) {
 
-					WebElement nameCell = row
-							.findElement(By.xpath(".//td[2]//span[contains(@class,'table-data-row')]"));
+					List<WebElement> nameCells = row
+							.findElements(By.xpath(".//td[2]//span[contains(@class,'table-data-row')]"));
 
-					if (nameCell.getText().trim().equalsIgnoreCase(listName)) {
+					if (nameCells.isEmpty()) {
+						continue;
+					}
+
+					if (nameCells.get(0).getText().trim().equalsIgnoreCase(listName)) {
 
 						WebElement checkboxTouchTarget = row
 								.findElement(By.xpath(".//div[contains(@class,'mat-mdc-checkbox-touch-target')]"));
@@ -74,10 +78,14 @@ public class TableSelectionManager {
 
 				for (WebElement row : tableRows) {
 
-					WebElement nameCell = row
-							.findElement(By.xpath(".//td[2]//span[contains(@class,'table-data-row')]"));
+					List<WebElement> nameCells = row
+							.findElements(By.xpath(".//td[2]//span[contains(@class,'table-data-row')]"));
 
-					if (nameCell.getText().trim().equalsIgnoreCase(templateName)) {
+					if (nameCells.isEmpty()) {
+						continue;
+					}
+
+					if (nameCells.get(0).getText().trim().equalsIgnoreCase(templateName)) {
 
 						WebElement radioTouchTarget = row
 								.findElement(By.xpath(".//div[contains(@class,'mat-mdc-radio-touch-target')]"));
