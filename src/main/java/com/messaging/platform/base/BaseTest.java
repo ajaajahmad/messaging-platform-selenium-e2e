@@ -14,8 +14,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TimeoutException;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import com.messaging.platform.pages.campaign.SmsCampaignPage;
 import com.messaging.platform.pages.campaign.WhatsAppCampaignPage;
@@ -86,7 +86,7 @@ public class BaseTest {
 	protected UserAccountMisTruecallerPanelPage userAccountMisTruecallerPanelPage;
 	protected UserAccountMisTruecallerApiPage userAccountMisTruecallerApiPage;
 
-	@BeforeSuite(alwaysRun = true)
+	@BeforeClass(alwaysRun = true)
 	public void setUp() {
 
 		String browserName = ConfigReader.get("browser");
@@ -151,12 +151,14 @@ public class BaseTest {
 
 	}
 
-	@AfterSuite(alwaysRun = true)
+	@AfterClass(alwaysRun = true)
 	public void tearDown() {
 		try {
 			if (logoutComponent != null) {
 				logoutComponent.userLogout();
 			}
+		} catch (RuntimeException e) {
+			System.err.println("Logout skipped during tear-down: " + e.getMessage().split("\n")[0]);
 		} finally {
 			if (driver != null) {
 				driver.quit();
