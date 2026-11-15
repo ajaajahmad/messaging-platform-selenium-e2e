@@ -59,6 +59,8 @@ public class BaseTest {
 		Logger.getLogger("").setLevel(Level.SEVERE);
 	}
 
+	protected final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(getClass());
+
 	protected WebDriver driver;
 	protected LoginPage loginPage;
 	protected ErrorValidationPage errorValidationPage;
@@ -115,6 +117,8 @@ public class BaseTest {
 			throw new RuntimeException("Browser not supported: " + browserName);
 		}
 
+		log.info("Browser started: {}", browserName);
+
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts()
@@ -123,8 +127,7 @@ public class BaseTest {
 		try {
 			driver.get(ConfigReader.get("app_url"));
 		} catch (TimeoutException e) {
-			System.err.println("Page load timed out; continuing so the loaded application state can be checked: "
-					+ e.getMessage());
+			log.warn("Page load timed out; continuing so the loaded application state can be checked");
 		}
 
 		loginPage = new LoginPage(driver);
@@ -166,10 +169,11 @@ public class BaseTest {
 				logoutComponent.userLogout();
 			}
 		} catch (RuntimeException e) {
-			System.err.println("Logout skipped during tear-down: " + e.getMessage().split("\n")[0]);
+			log.warn("Logout skipped during tear-down: {}", e.getMessage().split("\n")[0]);
 		} finally {
 			if (driver != null) {
 				driver.quit();
+				log.info("Browser closed");
 			}
 		}
 	}
