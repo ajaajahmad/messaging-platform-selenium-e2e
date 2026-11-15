@@ -1,21 +1,17 @@
 # Security Policy
 
-## Supported Versions
+## Supported versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+This is a test automation project with no published releases. Only the latest commit on `main` is maintained.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Reporting a vulnerability
 
-## Reporting a Vulnerability
+Report it privately through GitHub: open the **Security** tab of this repository and choose **Report a vulnerability**. Please do not open a public issue for security problems.
 
-Use this section to tell people how to report a vulnerability.
+Include the affected file or dependency and the steps to reproduce. You can expect a first reply within seven days.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Scope
+
+In scope are the code and dependencies in this repository. The application under test is not part of this repository and is out of scope.
+
+No credentials are stored here. The config file and test data files are gitignored, and only example files with placeholder or empty values are committed.
