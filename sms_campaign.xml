@@ -8,7 +8,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="com.quantumqa.tests.CreateCampaignTest" />
+			<class name="com.messaging.platform.tests.CreateCampaignTest" />
 		</classes>
 	</test>
 </suite>
