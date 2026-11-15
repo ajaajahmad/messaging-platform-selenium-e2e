@@ -73,7 +73,6 @@ geckodriver
 *.pdf
 *.properties.metadata/
 *.properties
-!src/test/resources/log4j2.properties
 
 # IDE
 .metadata/
