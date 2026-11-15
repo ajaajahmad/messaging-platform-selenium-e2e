@@ -8,7 +8,7 @@ import com.messaging.platform.dataprovider.TestDataProvider;
 
 public class ErrorValidationTest extends BaseTest {
 
-	@Test(dataProvider = "loginData", dataProviderClass = TestDataProvider.class)
+	@Test(dataProvider = "invalidLoginData", dataProviderClass = TestDataProvider.class)
 	public void verifyWithInvalidCredentials(String username, String password) throws IOException {
 
 		loginPage.enterUsername(username);

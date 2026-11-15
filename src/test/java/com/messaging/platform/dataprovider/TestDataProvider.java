@@ -21,6 +21,11 @@ public class TestDataProvider {
 		return data;
 	}
 
+	@DataProvider(name = "invalidLoginData")
+	public Object[][] invalidLoginData() {
+		return new Object[][] { { "nosuchusere2e", "Wrong#Pass123" } };
+	}
+
 	@DataProvider(name = "smsSummaryViewPanelData")
 	public Object[][] smsSummaryViewPanelData() {
 		Object[][] data = ExcelDataReader.getSmsSummaryViewPanelData();

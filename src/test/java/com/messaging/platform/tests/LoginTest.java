@@ -11,7 +11,7 @@ import com.messaging.platform.dataprovider.TestDataProvider;
 
 public class LoginTest extends BaseTest {
 
-	@Test(dataProvider = "loginData", dataProviderClass = TestDataProvider.class)
+	@Test(dataProvider = "excelUserData", dataProviderClass = TestDataProvider.class)
 	public void validLoginTest(String username, String password) throws IOException {
 		Assert.assertTrue(loginPage.isElementPresent(), "Login page is not displayed");
 		loginPage.userLogin(username, password);
