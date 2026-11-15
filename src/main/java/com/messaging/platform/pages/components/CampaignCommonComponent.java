@@ -18,12 +18,14 @@ public class CampaignCommonComponent extends BasePage {
 
 	private By campaignNameInputBox = By.xpath("//div[contains(@class,'campaign-name')]//input[@type='text']");
 
-	private By categoryDropdown = By.xpath(
-			"//div[contains(@class,'dropdown') and contains(@class,'labeled')]//span[normalize-space()='Select']");
+	private By categoryDropdown = By.cssSelector("app-custom-select-with-create ng-select .ng-select-container");
 
-	private By categorySearchInputBox = By.xpath("//input[@placeholder='Search ...']");
+	private By categorySearchInputBox = By.cssSelector("ng-dropdown-panel input[placeholder='Search ...']");
 
-	private By selectSearchedCategory = By.xpath("//div[@title='automation']");
+	private By categoryOption(String categoryText) {
+		return By.xpath("//ng-dropdown-panel//span[contains(@class,'custom-select-with-create-label') and @title='"
+				+ categoryText + "']");
+	}
 
 	// ========== ACTIONS ==========
 
@@ -38,6 +40,6 @@ public class CampaignCommonComponent extends BasePage {
 	public void selectCampaignCategory(String categoryText) {
 		click(categoryDropdown);
 		type(categorySearchInputBox, categoryText);
-		click(selectSearchedCategory);
+		click(categoryOption(categoryText));
 	}
 }
