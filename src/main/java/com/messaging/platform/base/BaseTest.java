@@ -1,10 +1,11 @@
 package com.messaging.platform.base;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,8 +15,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TimeoutException;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+
+import com.messaging.platform.listeners.TestListeners;
 
 import com.messaging.platform.pages.campaign.SmsCampaignPage;
 import com.messaging.platform.pages.campaign.WhatsAppCampaignPage;
@@ -48,12 +54,10 @@ import com.messaging.platform.pages.users.UserAccountMisWhatsAppApiPage;
 import com.messaging.platform.pages.users.UserAccountMisWhatsAppPanelPage;
 import com.messaging.platform.utils.ConfigReader;
 
+@Listeners(TestListeners.class)
 public class BaseTest {
 
-	static {
-		LogManager.getLogManager().reset();
-		Logger.getLogger("").setLevel(Level.SEVERE);
-	}
+	protected final Logger log = LogManager.getLogger(getClass());
 
 	protected WebDriver driver;
 	protected LoginPage loginPage;
@@ -86,7 +90,11 @@ public class BaseTest {
 	protected UserAccountMisTruecallerPanelPage userAccountMisTruecallerPanelPage;
 	protected UserAccountMisTruecallerApiPage userAccountMisTruecallerApiPage;
 
-	@BeforeSuite(alwaysRun = true)
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	@BeforeClass(alwaysRun = true)
 	public void setUp() {
 
 		String browserName = ConfigReader.get("browser");
@@ -107,6 +115,8 @@ public class BaseTest {
 			throw new RuntimeException("Browser not supported: " + browserName);
 		}
 
+		log.info("Browser started: {}", browserName);
+
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts()
@@ -115,8 +125,7 @@ public class BaseTest {
 		try {
 			driver.get(ConfigReader.get("app_url"));
 		} catch (TimeoutException e) {
-			System.err.println("Page load timed out; continuing so the loaded application state can be checked: "
-					+ e.getMessage());
+			log.warn("Page load timed out; continuing so the loaded application state can be checked");
 		}
 
 		loginPage = new LoginPage(driver);
@@ -151,15 +160,30 @@ public class BaseTest {
 
 	}
 
-	@AfterSuite(alwaysRun = true)
+	// Tags every log line from this thread; log4j2.xml routes tagged lines to a per-test file.
+	// The class name is part of the tag because method names repeat across test classes.
+	@BeforeMethod(alwaysRun = true)
+	public void tagLogWithTest(Method method) {
+		ThreadContext.put("test", getClass().getSimpleName() + "." + method.getName());
+	}
+
+	@AfterMethod(alwaysRun = true)
+	public void untagLog() {
+		ThreadContext.remove("test");
+	}
+
+	@AfterClass(alwaysRun = true)
 	public void tearDown() {
 		try {
 			if (logoutComponent != null) {
 				logoutComponent.userLogout();
 			}
+		} catch (RuntimeException e) {
+			log.warn("Logout skipped during tear-down: {}", e.getMessage().split("\n")[0]);
 		} finally {
 			if (driver != null) {
 				driver.quit();
+				log.info("Browser closed");
 			}
 		}
 	}

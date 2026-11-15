@@ -28,7 +28,7 @@ public class AccountMisTruecallerApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisTruecallerApi() throws InterruptedException, IOException {
 
 		userAccountMisTruecallerApiPage.openUserAccountMisTruecallerApi("2026-01-01", "2026-01-15");

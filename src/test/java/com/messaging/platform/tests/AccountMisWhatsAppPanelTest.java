@@ -28,7 +28,7 @@ public class AccountMisWhatsAppPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisWhatsAppPanel() throws InterruptedException, IOException {
 
 		userAccountMisWhatsAppPanelPage.openUserAccountMisWhatsAppPanel("2026-01-01", "2026-01-15");

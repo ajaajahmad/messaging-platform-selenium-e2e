@@ -28,7 +28,7 @@ public class SmsSummaryApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifySmsSummaryPanel() throws InterruptedException, IOException {
 
 		smsSummaryApiPage.openSmsSummary("01/01/2026 - 01/15/2026");

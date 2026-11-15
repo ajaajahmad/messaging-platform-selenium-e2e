@@ -19,10 +19,12 @@ public class ViewByComponent extends BasePage {
 
 	private By moreViewByDropdown = By.id("more_con");
 
+	private By loader = By.className("loader-wrapper");
+
 	public void selectViewByTab(String viewByText) {
-		WebElement viewByTab = driver.findElement(By.xpath("//li//span[normalize-space()='" + viewByText + "']"));
-		viewByTab.click();
-		sleep();
+		waitForInvisible(loader);
+		click(By.xpath("//li//span[normalize-space()='" + viewByText + "']"));
+		waitForInvisible(loader);
 	}
 
 	public boolean selectMoreViewByOption(int index) {
@@ -39,6 +41,7 @@ public class ViewByComponent extends BasePage {
 		if (options.size() > index) {
 			options.get(index).click();
 			sleep();
+			waitForInvisible(loader);
 			return true;
 		}
 

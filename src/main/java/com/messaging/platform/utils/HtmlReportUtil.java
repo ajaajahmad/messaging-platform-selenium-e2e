@@ -4,8 +4,9 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WrapsDriver;
 
 public final class HtmlReportUtil {
 
@@ -43,17 +44,24 @@ public final class HtmlReportUtil {
 		html.append("<h2>").append(title).append("</h2>");
 		html.append("<table>");
 
-		List<WebElement> rows = table.findElements(By.tagName("tr"));
-		for (WebElement row : rows) {
+		// Read in one browser call: the table re-renders while a view loads, so walking it
+		// cell by cell can hit a stale element.
+		JavascriptExecutor js = (JavascriptExecutor) ((WrapsDriver) table).getWrappedDriver();
+		@SuppressWarnings("unchecked")
+		List<List<List<String>>> rows = (List<List<List<String>>>) js.executeScript(
+				"return Array.from(arguments[0].querySelectorAll('tr')).map(function (row) {"
+						+ " return Array.from(row.children).filter(function (cell) {"
+						+ " return cell.tagName === 'TH' || cell.tagName === 'TD'; }).map(function (cell) {"
+						+ " return [cell.tagName.toLowerCase(), cell.innerHTML]; }); });",
+				table);
+
+		for (List<List<String>> row : rows) {
 			html.append("<tr>");
 
-			for (WebElement cell : row.findElements(By.xpath("./th|./td"))) {
-				html.append("<").append(cell.getTagName()).append(">");
-
-				String cellContent = cell.getAttribute("innerHTML");
-				html.append(cellContent);
-
-				html.append("</").append(cell.getTagName()).append(">");
+			for (List<String> cell : row) {
+				html.append("<").append(cell.get(0)).append(">");
+				html.append(cell.get(1));
+				html.append("</").append(cell.get(0)).append(">");
 			}
 			html.append("</tr>");
 		}

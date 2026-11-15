@@ -1,8 +1,7 @@
 package com.messaging.platform.pages.login;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import com.messaging.platform.base.BasePage;
@@ -13,29 +12,21 @@ public class ErrorValidationPage extends BasePage {
 		super(driver);
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'Username is required')]")
-	private WebElement errorTextUsername;
-	@FindBy(xpath = "//span[contains(text(),'Password is required')]")
-	private WebElement errorTextPassword;
-	@FindBy(xpath = "//div[contains(@class, 'snack-bar-label')]")
-	private WebElement errorMessaageLogin;
+	private By errorTextUsername = By.xpath("//span[contains(text(),'Username is required')]");
+
+	private By errorTextPassword = By.xpath("//span[contains(text(),'Password is required')]");
+
+	private By errorMessageLogin = By.xpath("//div[contains(@class, 'snack-bar-label')]");
 
 	public void verifyWithEmptyUsername() {
-		String errorTextU = errorTextUsername.getText();
-		Assert.assertEquals(errorTextU, "Username is required");
-		System.out.println(errorTextU);
+		Assert.assertEquals(getText(errorTextUsername), "Username is required");
 	}
 
 	public void verifyWithEmptyPassword() {
-		String errorTextP = errorTextPassword.getText();
-		Assert.assertEquals(errorTextP, "Password is required");
-		System.out.println(errorTextP);
+		Assert.assertEquals(getText(errorTextPassword), "Password is required");
 	}
 
 	public void verifyWithInvalidCred() {
-		String errorMessageLogin = errorMessaageLogin.getText();
-		Assert.assertEquals(errorMessageLogin, "Combination of username and password is incorrect.");
-		System.out.println(errorMessageLogin);
+		Assert.assertEquals(getText(errorMessageLogin), "Combination of username and password is incorrect.");
 	}
-
 }

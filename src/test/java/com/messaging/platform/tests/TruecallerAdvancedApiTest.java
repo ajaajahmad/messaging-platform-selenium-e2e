@@ -28,7 +28,7 @@ public class TruecallerAdvancedApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyTruecallerAdvancedApi() throws InterruptedException, IOException {
 
 		truecallerAdvancedApiPage.openTruecallerAdvanced("2026-01-01", "2026-01-15");

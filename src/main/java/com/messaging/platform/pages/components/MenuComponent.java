@@ -1,6 +1,10 @@
 package com.messaging.platform.pages.components;
 
+import java.time.Duration;
+
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import com.messaging.platform.base.BasePage;
 
 public class MenuComponent extends BasePage {
@@ -28,7 +32,7 @@ public class MenuComponent extends BasePage {
 		if (!collapse.isDisplayed()) {
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", toggle);
 			sleep(800);
-			toggle.click();
+			clickMenuItem(toggle);
 			sleep(1000);
 		}
 
@@ -42,11 +46,13 @@ public class MenuComponent extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", target);
 
 		sleep(800);
-		target.click();
+		clickMenuItem(target);
 		sleep(1000);
 	}
 
 	public void navigate(String... menuPath) {
+
+		log.info("Navigate to {}", String.join(" > ", menuPath));
 
 		WebElement currentScope = root();
 
@@ -54,7 +60,35 @@ public class MenuComponent extends BasePage {
 			currentScope = expand(currentScope, menuPath[i]);
 		}
 
-		clickFinal(currentScope, menuPath[menuPath.length - 1]);
+		String urlBefore = driver.getCurrentUrl();
+		String target = menuPath[menuPath.length - 1];
+
+		clickFinal(currentScope, target);
+
+		// The click is sometimes swallowed while the sidebar is still settling; try once more.
+		if (!waitForUrlChange(urlBefore)) {
+			log.warn("Page did not change after clicking {}; clicking again", target);
+			clickFinal(currentScope, target);
+			waitForUrlChange(urlBefore);
+		}
+	}
+
+	private boolean waitForUrlChange(String urlBefore) {
+		try {
+			return new WebDriverWait(driver, Duration.ofSeconds(5))
+					.until(d -> !d.getCurrentUrl().equals(urlBefore));
+		} catch (TimeoutException e) {
+			return false;
+		}
+	}
+
+	// The sidebar animates open, so an item can be in the DOM but not yet clickable.
+	private void clickMenuItem(WebElement item) {
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(item)).click();
+		} catch (ElementNotInteractableException | TimeoutException e) {
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", item);
+		}
 	}
 
 	private void sleep(long millis) {

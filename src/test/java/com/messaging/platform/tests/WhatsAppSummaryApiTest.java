@@ -28,7 +28,7 @@ public class WhatsAppSummaryApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyWhatsAppSummaryPanel() throws InterruptedException, IOException {
 
 		whatsAppSummaryApiPage.openWhatsAppSummary("01/01/2026 - 01/15/2026");

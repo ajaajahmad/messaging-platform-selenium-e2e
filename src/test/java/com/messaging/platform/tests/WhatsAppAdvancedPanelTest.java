@@ -28,7 +28,7 @@ public class WhatsAppAdvancedPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyWhatsAppAdvancedPanel() throws InterruptedException, IOException {
 
 		whatsAppAdvancedPanelPage.openWhatsAppAdvanced("2026-01-01", "2026-01-15");

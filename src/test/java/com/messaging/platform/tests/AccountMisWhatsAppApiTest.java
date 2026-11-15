@@ -28,7 +28,7 @@ public class AccountMisWhatsAppApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisWhatsAppApi() throws InterruptedException, IOException {
 
 		userAccountMisWhatsAppApiPage.openUserAccountMisWhatsAppApi("2026-01-01", "2026-01-15");

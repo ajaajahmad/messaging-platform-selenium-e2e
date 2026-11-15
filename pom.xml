@@ -24,6 +24,7 @@
 		<!-- Default values for system properties -->
 		<browser>chrome</browser>
 		<environment>qa</environment>
+		<suiteXmlFile>testng.xml</suiteXmlFile>
 	</properties>
 
 	<dependencies>
@@ -88,10 +89,17 @@
 			<version>2.21.0</version>
 		</dependency>
 
-		<!-- SLF4J Bridge for Selenium -->
+		<!-- Routes TestNG's SLF4J logging into Log4j2 -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- Routes Selenium's java.util.logging into Log4j2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-jul</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
 	</dependencies>
@@ -107,6 +115,10 @@
 				<configuration>
 					<source>21</source>
 					<target>21</target>
+					<!-- Registers RunLookup with Log4j2 -->
+					<annotationProcessors>
+						<annotationProcessor>org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor</annotationProcessor>
+					</annotationProcessors>
 				</configuration>
 			</plugin>
 
@@ -117,14 +129,15 @@
 				<version>${maven.surefire.version}</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng.xml</suiteXmlFile>
+						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 					</suiteXmlFiles>
 					<systemPropertyVariables>
 						<browser>${browser}</browser>
 						<environment>${environment}</environment>
 					</systemPropertyVariables>
 					<useSystemClassLoader>false</useSystemClassLoader>
-					<argLine>-Xmx1024m</argLine>
+					<!-- The logging manager must be set at JVM start, before anything touches java.util.logging -->
+					<argLine>-Xmx1024m -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager</argLine>
 				</configuration>
 			</plugin>
 

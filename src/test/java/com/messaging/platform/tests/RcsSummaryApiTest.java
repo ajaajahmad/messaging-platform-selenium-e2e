@@ -28,7 +28,7 @@ public class RcsSummaryApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyRcsSummaryPanel() throws InterruptedException, IOException {
 
 		rcsSummaryApiPage.openRcsSummary("01/01/2026 - 01/15/2026");

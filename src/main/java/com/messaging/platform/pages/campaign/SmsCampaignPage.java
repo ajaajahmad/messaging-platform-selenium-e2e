@@ -31,7 +31,7 @@ public class SmsCampaignPage extends BasePage {
 
 	private By campaignsElement = By.xpath("//span[normalize-space()='Campaigns']");
 
-	private By campaignsDltPopup = By.xpath("//button[contains(text(),'OK')]");
+//	private By campaignsDltPopup = By.xpath("//button[contains(text(),'OK')]");
 
 	private By createCampaign = By.xpath(
 			"//button[@class='btn btn-design btn-send ng-star-inserted']//span[contains(text(),'Create Campaign')]");
@@ -48,6 +48,10 @@ public class SmsCampaignPage extends BasePage {
 
 	private By contactsImportButton = By
 			.xpath("//button[contains(@class,'process-file') and contains(normalize-space(),'Import')]");
+
+	private By activeModal = By.cssSelector(".app-modal.modal-active");
+
+	private By contactsImportedTick = By.cssSelector(".upload-contacts .tick-mark");
 
 	private By chooseTemplateButton = By
 			.xpath("//button[contains(@class,'btn-design') and contains(text(),'Choose Template')]");
@@ -78,9 +82,9 @@ public class SmsCampaignPage extends BasePage {
 		getCampaignsSubMenu().click();
 	}
 
-	public void acknowledgeDltPopupWindow() {
-		click(campaignsDltPopup);
-	}
+//	public void acknowledgeDltPopupWindow() {
+//		click(campaignsDltPopup);
+//	}
 
 	public void clickOnCreateCampaignButton() {
 		click(createCampaign);
@@ -120,6 +124,8 @@ public class SmsCampaignPage extends BasePage {
 
 	public void clickOnImportButton() {
 		click(contactsImportButton);
+		waitForInvisible(activeModal);
+		waitForVisible(contactsImportedTick);
 	}
 
 	public void clickOnChooseTemplate() {

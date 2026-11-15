@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Full Suite">
+	<test name="LoginTest">
+		<classes>
+			<class name="com.messaging.platform.tests.LoginTest" />
+		</classes>
+	</test>
+	<test name="ErrorValidationTest">
+		<classes>
+			<class name="com.messaging.platform.tests.ErrorValidationTest" />
+		</classes>
+	</test>
+	<test name="AccountMisRcsApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisRcsApiTest" />
+		</classes>
+	</test>
+	<test name="AccountMisRcsPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisRcsPanelTest" />
+		</classes>
+	</test>
+	<test name="AccountMisSmsApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisSmsApiTest" />
+		</classes>
+	</test>
+	<test name="AccountMisSmsPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisSmsPanelTest" />
+		</classes>
+	</test>
+	<test name="AccountMisTruecallerApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisTruecallerApiTest" />
+		</classes>
+	</test>
+	<test name="AccountMisTruecallerPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisTruecallerPanelTest" />
+		</classes>
+	</test>
+	<test name="AccountMisWhatsAppApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisWhatsAppApiTest" />
+		</classes>
+	</test>
+	<test name="AccountMisWhatsAppPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.AccountMisWhatsAppPanelTest" />
+		</classes>
+	</test>
+	<test name="RcsAdvancedApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.RcsAdvancedApiTest" />
+		</classes>
+	</test>
+	<test name="RcsAdvancedPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.RcsAdvancedPanelTest" />
+		</classes>
+	</test>
+	<test name="RcsSummaryApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.RcsSummaryApiTest" />
+		</classes>
+	</test>
+	<test name="RcsSummaryPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.RcsSummaryPanelTest" />
+		</classes>
+	</test>
+	<test name="SmsAdvancedApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.SmsAdvancedApiTest" />
+		</classes>
+	</test>
+	<test name="SmsAdvancedPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.SmsAdvancedPanelTest" />
+		</classes>
+	</test>
+	<test name="SmsSummaryApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.SmsSummaryApiTest" />
+		</classes>
+	</test>
+	<test name="SmsSummaryPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.SmsSummaryPanelTest" />
+		</classes>
+	</test>
+	<test name="StandaloneReporTest">
+		<classes>
+			<class name="com.messaging.platform.tests.StandaloneReporTest" />
+		</classes>
+	</test>
+	<test name="TruecallerAdvancedApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.TruecallerAdvancedApiTest" />
+		</classes>
+	</test>
+	<test name="TruecallerAdvancedPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.TruecallerAdvancedPanelTest" />
+		</classes>
+	</test>
+	<test name="TruecallerSummaryApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.TruecallerSummaryApiTest" />
+		</classes>
+	</test>
+	<test name="TruecallerSummaryPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.TruecallerSummaryPanelTest" />
+		</classes>
+	</test>
+	<test name="WhatsAppAdvancedApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.WhatsAppAdvancedApiTest" />
+		</classes>
+	</test>
+	<test name="WhatsAppAdvancedPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.WhatsAppAdvancedPanelTest" />
+		</classes>
+	</test>
+	<test name="WhatsAppSummaryApiTest">
+		<classes>
+			<class name="com.messaging.platform.tests.WhatsAppSummaryApiTest" />
+		</classes>
+	</test>
+	<test name="WhatsAppSummaryPanelTest">
+		<classes>
+			<class name="com.messaging.platform.tests.WhatsAppSummaryPanelTest" />
+		</classes>
+	</test>
+	<test name="CreateCampaignTest">
+		<classes>
+			<class name="com.messaging.platform.tests.CreateCampaignTest" />
+		</classes>
+	</test>
+</suite>

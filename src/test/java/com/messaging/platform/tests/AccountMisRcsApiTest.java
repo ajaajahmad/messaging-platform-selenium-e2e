@@ -28,7 +28,7 @@ public class AccountMisRcsApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisRcsApi() throws InterruptedException, IOException {
 
 		userAccountMisRcsApiPage.openUserAccountMisRcsApi("2026-01-01", "2026-01-15");
