@@ -76,6 +76,8 @@ Each test class opens its own browser, logs in and logs out. The tests run again
 
 - `reports/` holds the exported HTML tables, one folder per report page
 - `screenshots/` holds the screenshots
+- `screenshots/failures/` holds a screenshot of the browser for each failed test
+- `logs/automation.log` holds the Log4j output: the start and result of every test, plus each click, typed field and navigation. Typed text and login data are never logged.
 
 ## Licence
 
