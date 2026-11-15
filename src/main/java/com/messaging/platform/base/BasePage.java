@@ -3,6 +3,8 @@ package com.messaging.platform.base;
 import java.time.Duration;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -12,13 +14,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.messaging.platform.utils.LogUtils;
 
 public class BasePage {
 
 	protected WebDriver driver;
 	protected WebDriverWait wait;
-	protected static LogUtils log;
+	protected final Logger log = LogManager.getLogger(getClass());
 
 	private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(15);
 	private static final long HARD_SLEEP_MS = 300;
@@ -27,7 +28,6 @@ public class BasePage {
 
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
-		BasePage.log = new LogUtils();
 		this.wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
 	}
 
