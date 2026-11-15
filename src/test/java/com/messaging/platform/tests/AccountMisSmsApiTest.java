@@ -28,7 +28,7 @@ public class AccountMisSmsApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisSmsApi() throws InterruptedException, IOException {
 
 		userAccountMisSmsApiPage.openUserAccountMisSmsApi("2026-01-01", "2026-01-15");

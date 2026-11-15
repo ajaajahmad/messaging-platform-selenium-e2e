@@ -28,7 +28,7 @@ public class AccountMisTruecallerPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisTruecallerPanel() throws InterruptedException, IOException {
 
 		userAccountMisTruecallerPanelPage.openUserAccountMisTruecallerPanel("2026-01-01", "2026-01-15");

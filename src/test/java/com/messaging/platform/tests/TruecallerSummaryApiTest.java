@@ -28,7 +28,7 @@ public class TruecallerSummaryApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyTruecallerSummaryPanel() throws InterruptedException, IOException {
 
 		truecallerSummaryApiPage.openTruecallerSummary("01/01/2026 - 01/15/2026");

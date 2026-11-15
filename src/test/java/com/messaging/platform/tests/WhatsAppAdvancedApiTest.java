@@ -28,7 +28,7 @@ public class WhatsAppAdvancedApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyWhatsAppAdvancedApi() throws InterruptedException, IOException {
 
 		whatsAppAdvancedApiPage.openWhatsAppAdvanced("2026-01-01", "2026-01-15");

@@ -28,7 +28,7 @@ public class TruecallerAdvancedPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyTruecallerAdvancedPanel() throws InterruptedException, IOException {
 
 		truecallerAdvancedPanelPage.openTruecallerAdvanced("2026-01-01", "2026-01-15");

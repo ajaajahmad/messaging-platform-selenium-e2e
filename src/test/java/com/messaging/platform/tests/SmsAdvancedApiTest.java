@@ -28,7 +28,7 @@ public class SmsAdvancedApiTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifySmsAdvancedApi() throws InterruptedException, IOException {
 
 		smsAdvancedApiPage.openSmsAdvanced("2026-01-01", "2026-01-15");

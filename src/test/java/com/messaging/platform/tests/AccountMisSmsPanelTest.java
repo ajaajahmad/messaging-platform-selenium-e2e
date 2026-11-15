@@ -28,7 +28,7 @@ public class AccountMisSmsPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisSmsPanel() throws InterruptedException, IOException {
 
 		userAccountMisSmsPanelPage.openUserAccountMisSmsPanel("2026-01-01", "2026-01-15");

@@ -28,7 +28,7 @@ public class AccountMisRcsPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifyAccountMisRcsPanel() throws InterruptedException, IOException {
 
 		userAccountMisRcsPanelPage.openUserAccountMisRcsPanel("2026-01-01", "2026-01-15");

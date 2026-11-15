@@ -28,7 +28,7 @@ public class SmsAdvancedPanelTest extends BaseTest {
 		}
 	}
 
-	@Test()
+	@Test(dependsOnMethods = "userLogin")
 	public void verifySmsAdvancedPanel() throws InterruptedException, IOException {
 
 		smsAdvancedPanelPage.openSmsAdvanced("2026-01-01", "2026-01-15");
