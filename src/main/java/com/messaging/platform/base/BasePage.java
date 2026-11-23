@@ -91,7 +91,7 @@ public class BasePage {
 		try {
 			log.warn("Toast covering the page: " + toasts.get(0).getText());
 		} catch (StaleElementReferenceException e) {
-			// already gone
+			
 		}
 		waitForInvisible(TOAST);
 	}
