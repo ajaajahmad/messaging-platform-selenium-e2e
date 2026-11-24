@@ -85,8 +85,8 @@ Each run writes its logs to its own folder, named after the time the run started
 
 ```
 logs/2026-11-15_18-20-41/
-  messaging-platform-e2e.log        every line from the run at DEBUG, tagged with its test
-  LoginTest.validLoginTest.log      one file per test: its steps and any stack trace
+  messaging-platform-e2e.log:        every line from the run at DEBUG, tagged with its test
+  LoginTest.validLoginTest.log:      one file per test: its steps and any stack trace
   ...
 ```
 
