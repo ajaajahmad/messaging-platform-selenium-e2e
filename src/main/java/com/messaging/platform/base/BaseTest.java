@@ -119,8 +119,7 @@ public class BaseTest {
 
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts()
-				.pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("timeout"))));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("timeout"))));
 
 		try {
 			driver.get(ConfigReader.get("app_url"));
@@ -160,8 +159,10 @@ public class BaseTest {
 
 	}
 
-	// Tags every log line from this thread; log4j2.xml routes tagged lines to a per-test file.
-	// The class name is part of the tag because method names repeat across test classes.
+	// Tags every log line from this thread; log4j2.xml routes tagged lines to a
+	// per-test file.
+	// The class name is part of the tag because method names repeat across test
+	// classes.
 	@BeforeMethod(alwaysRun = true)
 	public void tagLogWithTest(Method method) {
 		ThreadContext.put("test", getClass().getSimpleName() + "." + method.getName());
