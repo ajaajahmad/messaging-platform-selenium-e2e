@@ -14,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class BasePage {
 
 	protected WebDriver driver;
@@ -82,7 +81,8 @@ public class BasePage {
 		sleep();
 	}
 
-	// A toast can sit on top of the control being clicked; note what it said and wait for it to go.
+	// A toast can sit on top of the control being clicked; note what it said and
+	// wait for it to go.
 	private void waitForToastToClear() {
 		List<WebElement> toasts = driver.findElements(TOAST);
 		if (toasts.isEmpty()) {
@@ -91,7 +91,7 @@ public class BasePage {
 		try {
 			log.warn("Toast covering the page: " + toasts.get(0).getText());
 		} catch (StaleElementReferenceException e) {
-			
+
 		}
 		waitForInvisible(TOAST);
 	}
